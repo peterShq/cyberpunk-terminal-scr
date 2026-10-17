@@ -1,0 +1,24 @@
+# Build output
+build/
+src/app.res
+
+# rc.exe temp files (name embeds a random pid)
+src/RC*
+
+# Diagnostic output from --render / --uiprobe
+_frame*.png
+_ui_probe.png
+*.log
+
+# Editors / OS
+.vs/
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Python bytecode (normalize-bat.py is dev-only and not shipped)
+__pycache__/
+*.pyc
