@@ -1,0 +1,57 @@
+#include <windows.h>
+
+/*
+ * Resources for NexusCore.scr.
+ *
+ * This file exists because the friendly name shown in
+ *   Settings > Personalisation > Lock screen > Screen saver
+ * comes from string resource ID 1 (RT_STRING) of the .scr itself.
+ * Without it Windows falls back to the raw file name ("NexusCore"),
+ * which is not what we want users to see. See Microsoft KB 182383.
+ *
+ * NOTE for future edits: csc.exe refuses BOTH /win32manifest and
+ * /win32res (error CS1564). That is why app.manifest lives in its own
+ * file and is pulled in below with the RT_MANIFEST block - everything
+ * has to go through a single .res.
+ */
+
+/* ID 1 = the display name in the screensaver list. */
+STRINGTABLE
+BEGIN
+    1 "Cyberpunk Terminal"
+END
+
+/*
+ * The manifest goes in as RT_MANIFEST (which is 24) with ID 1 - that is
+ * exactly where CreateProcess looks for it. Keep app.manifest as the single
+ * source of truth for DPI awareness and the OS compatibility list.
+ */
+1 RT_MANIFEST "app.manifest"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION    4,7,2,0
+ PRODUCTVERSION 4,7,2,0
+ FILEFLAGSMASK  0x3fL
+ FILEFLAGS      0x0L
+ FILEOS         VOS_NT_WINDOWS32
+ FILETYPE       VFT_APP
+ FILESUBTYPE    VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName",      "Nexus"
+            VALUE "FileDescription",  "Cyberpunk Terminal Screensaver"
+            VALUE "FileVersion",      "4.7.2.0"
+            VALUE "InternalName",     "NexusCore"
+            VALUE "OriginalFilename", "NexusCore.scr"
+            VALUE "ProductName",      "Cyberpunk Terminal"
+            VALUE "ProductVersion",   "4.7.2.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
